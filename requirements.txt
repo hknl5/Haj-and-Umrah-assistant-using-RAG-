@@ -1,0 +1,7 @@
+chromadb
+numpy
+openai
+sounddevice
+soundfile
+torch
+transformers
