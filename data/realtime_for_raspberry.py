@@ -25,7 +25,7 @@ from IPython.display import HTML, Javascript, display
 
 
 
-api_key = "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"
+api_key = ""
 client = OpenAI(api_key=api_key)
 
 # Config for embedding model and Chroma
