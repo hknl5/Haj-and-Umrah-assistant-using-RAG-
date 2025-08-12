@@ -7,6 +7,7 @@ pyaudio
 openwakeword
 tqdm
 transformers
+
 torch
 scipy
 SpeechRecognition
