@@ -1,7 +1,13 @@
 chromadb
+onnxruntime
 numpy
-openai
 sounddevice
 soundfile
-torch
+pyaudio
+openwakeword
+tqdm
 transformers
+torch
+scipy
+SpeechRecognition
+openai

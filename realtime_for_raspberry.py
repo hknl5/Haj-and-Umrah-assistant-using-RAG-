@@ -25,7 +25,7 @@ from IPython.display import HTML, Javascript, display
 
 
 
-api_key = ""
+api_key = "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"
 client = OpenAI(api_key=api_key)
 
 # Config for embedding model and Chroma
@@ -206,14 +206,59 @@ def esc_pressed(timeout_ms=0):
 # --------------------------------------------------------------
 
 
+import sounddevice as sd #safa
+from openwakeword.model import Model #safa
+
+# === SAFA wake word thing ===
+
+FRAME_DURATION = 0.08  # 80 ms
+FRAME_SIZE = int(SAMPLE_RATE * FRAME_DURATION)
+
+WW_MODEL_PATH = "/Users/hanouf/Downloads/akid_final/data/Safa.onnx"  # PATH 
+wake_model = Model(inference_framework="onnx", wakeword_models=[WW_MODEL_PATH])
+
+def wait_for_wakeword(threshold: float = 0.5) -> bool:
+
+    detected = {"ok": False}
+
+    def audio_callback(indata, frames, time, status):
+        if status:
+            print(status)
+        scores = wake_model.predict(indata[:, 0])
+        for name, score in scores.items():
+            if score > threshold:
+                print(f"[WakeWord] Detected: {name} ({score:.2f})")
+                detected["ok"] = True
+                raise sd.CallbackStop() 
+
+    print(" Listening for wake word...")
+    try:
+        with sd.InputStream(
+            channels=1,
+            samplerate=SAMPLE_RATE,
+            blocksize=FRAME_SIZE,
+            dtype='int16',
+            callback=audio_callback
+        ):
+            while not detected["ok"]:
+                sd.sleep(50)
+    except sd.CallbackStop:
+        pass
+    except KeyboardInterrupt:
+        print("\n[WakeWord] Stopped by user.")
+        return False
+
+    return detected["ok"]
+
 def main_loop():
     print("Press ESC to quit.")
-    with RawKey():  # enable raw key reads
+    with RawKey():  # enable raw key reads  # enable raw key reads
         while True:
             if esc_pressed(10):   # check every 10ms
                 print("🚪 Exiting...")
                 break
 
+            wait_for_wakeword(threshold=0.5) #SAFA
             wav_buf = record_wav_to_buffer()
             txt = transcribe(wav_buf)
             print("User:", txt)
@@ -226,7 +271,7 @@ def main_loop():
                 print(f"[{i}] {src['text'][:150].replace('','')}")
 
             if USE_NEW_SDK:
-                audio_path = tts_to_wav_file(answer, voice="ash")
+                audio_path = tts_to_wav_file(answer, voice="alloy")
                 play_wav(audio_path)
             else:
                 print("⚠️ Install new OpenAI SDK for TTS:  pip install -U openai")
