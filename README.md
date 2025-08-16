@@ -77,9 +77,12 @@ GT_TRANSCRIPT="<your Query>" python realtime_w_scores.py
 - **fourth-2-generation-w-voice-API.ipynb** — LLM + TTS API generation notebook.
 
 ---
-## Experimental Results
+## Results
 
-Below are the collected runtime metrics from our real-time RAG + STT + TTS pipeline.
+We evaluated the real-time RAG + STT + TTS pipeline with two example queries.  
+Metrics include retrieval quality, latency, STT accuracy, wake word robustness, and system usage.
+
+---
 
 ### Query 1: *"How to perform Umrah"*
 - **Retrieval Cosine Distances (top 3):** 0.1081, 0.1328, 0.1417
@@ -90,28 +93,28 @@ Below are the collected runtime metrics from our real-time RAG + STT + TTS pipel
 - **End-to-End Latency (short):** 9.796s
 - **STT Accuracy:** WER=0.500, CER=0.150
 - **Wake Word:** last_score=0.791, count=1, false=0, false_rate=0.000
-- **System Usage:** CPU=9.4%, RAM= 808.3MB 
+- **System Usage:** CPU=9.4%, RAM=808.3 MB
 
 ---
 
 ### Query 2: *"What shall I say after Tawaf?"*
 - **Retrieval Cosine Distances (top 3):** 0.1757, 0.1794, 0.1812
-- **LLM:** completion_tokens=71, prompt_tokens=832, latency=1.899s, tokens/sec=37.39
-- **STT Latency:** 2.277s
-- **RAG→LLM Latency:** 1.899s
-- **TTS Latency:** 2.980s
-- **End-to-End Latency (short):** 7.157s
-- **STT Accuracy:** WER=0.333 CER=0.103
-- **Wake Word:** last_score=0.827, count=1, false=0, false_rate=0.000
-- **System Usage:** CPU=9.2%, RAM= 824.3MB
+- **LLM:** completion_tokens=72, prompt_tokens=832, latency=2.574s, tokens/sec=27.98
+- **STT Latency:** 3.660s
+- **RAG→LLM Latency:** 2.574s
+- **TTS Latency:** 3.621s
+- **End-to-End Latency (short):** 9.855s
+- **STT Accuracy:** WER=0.333, CER=0.103
+- **Wake Word:** last_score=0.657, count=1, false=0, false_rate=0.000
+- **System Usage:** CPU=10.7%, RAM=820.0 MB
 
 ---
 
 ### Observations
-- **Wake word model** is stable with low false activation rate (0.000).
-- **End-to-end latency** across both examples is between ~7–10s, which is acceptable for real-time dialogue at the booth.
-- **WER/CER** are within a reasonable range for noisy conditions (0.50 / 0.15).
-- **System usage** (CPU < 16%, RAM ~800 MB) confirms the solution runs within device resource constraints.
+- **Wake word model** is stable with *zero* false activations.
+- **End-to-end latency** averages around **~9–10s**, acceptable for real-time interaction.
+- **STT accuracy**: WER between 0.33–0.50, CER between 0.10–0.15, which is reasonable in noisy conditions.
+- **System usage** remains light (<11% CPU, ~800 MB RAM), showing the solution is resource-efficient.
 
 ---
 
