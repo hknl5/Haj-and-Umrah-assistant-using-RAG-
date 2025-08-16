@@ -101,7 +101,7 @@ Below are the collected runtime metrics from our real-time RAG + STT + TTS pipel
 - **RAG→LLM Latency:** 1.899s
 - **TTS Latency:** 2.980s
 - **End-to-End Latency (short):** 7.157s
-- **STT Accuracy:** (GT transcript not provided → N/A)
+- **STT Accuracy:** WER=0.333 CER=0.103
 - **Wake Word:** last_score=0.827, count=1, false=0, false_rate=0.000
 - **System Usage:** CPU=9.2%, RAM= 824.3MB
 
