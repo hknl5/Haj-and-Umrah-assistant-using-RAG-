@@ -57,7 +57,13 @@ sudo apt-get install -y build-essential cmake
 ```bash
 python realtime_for_raspberry.py
 ```
+### scores
 
+for sores:
+
+```bash
+GT_TRANSCRIPT="<your Query>" python realtime_w_scores.py
+```
 ---
 
 ## 📂 Files Overview
