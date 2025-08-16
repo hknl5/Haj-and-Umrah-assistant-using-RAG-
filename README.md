@@ -90,7 +90,7 @@ Below are the collected runtime metrics from our real-time RAG + STT + TTS pipel
 - **End-to-End Latency (short):** 9.796s
 - **STT Accuracy:** WER=0.500, CER=0.150
 - **Wake Word:** last_score=0.791, count=1, false=0, false_rate=0.000
-- **System Usage:** CPU=9.4%, RAM=808.3 
+- **System Usage:** CPU=9.4%, RAM= 808.3MB 
 
 ---
 
@@ -103,7 +103,7 @@ Below are the collected runtime metrics from our real-time RAG + STT + TTS pipel
 - **End-to-End Latency (short):** 7.157s
 - **STT Accuracy:** (GT transcript not provided → N/A)
 - **Wake Word:** last_score=0.827, count=1, false=0, false_rate=0.000
-- **System Usage:** CPU=9.2%, RAM=824.3 
+- **System Usage:** CPU=9.2%, RAM= 824.3MB
 
 ---
 
